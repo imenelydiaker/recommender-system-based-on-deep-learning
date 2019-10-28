@@ -1,0 +1,748 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.*?>
+<?import javafx.collections.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<GridPane alignment="center" hgap="10" stylesheets="stylesheet.css" vgap="10" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="AppController">
+   <columnConstraints>
+      <ColumnConstraints />
+   </columnConstraints>
+   <rowConstraints>
+      <RowConstraints />
+   </rowConstraints>
+   <children>
+      <AnchorPane prefHeight="600.0" prefWidth="900.0" style="-fx-background-color: #2E2E2E;">
+         <children>
+            <Pane prefHeight="600.0" prefWidth="200.0" style="-fx-background-color: #202020;">
+               <children>
+                  <JFXButton layoutY="174.0" onMouseClicked="#models" prefHeight="60.0" prefWidth="200.0" ripplerFill="#9b404a" text="Models" textAlignment="CENTER" textFill="#d6b7b7">
+                     <font>
+                        <Font name="Century Gothic" size="22.0" />
+                     </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </JFXButton>
+                  <JFXButton layoutY="344.0" onMouseClicked="#training" prefHeight="60.0" prefWidth="200.0" ripplerFill="#9b404a" text="Training" textAlignment="CENTER" textFill="#d6b7b7">
+                     <font>
+                        <Font name="Century Gothic" size="22.0" />
+                     </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </JFXButton>
+                  <JFXButton fx:id="results" layoutY="429.0" onMouseClicked="#results" prefHeight="60.0" prefWidth="200.0" ripplerFill="#9b404a" text="Tests &amp; Results" textAlignment="CENTER" textFill="#d6b7b7">
+                     <font>
+                        <Font name="Century Gothic" size="22.0" />
+                     </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </JFXButton>
+                  <JFXButton layoutY="515.0" onMouseClicked="#about" prefHeight="60.0" prefWidth="200.0" ripplerFill="#9b404a" text="About" textAlignment="CENTER" textFill="#d6b7b7">
+                     <font>
+                        <Font size="22.0" />
+                     </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </JFXButton>
+                  <JFXTextArea editable="false" focusColor="#9b404a" layoutX="24.0" layoutY="16.0" prefHeight="128.0" prefWidth="160.0" promptText="Recommender System Based on Neural Networks" style="-fx-prompt-text-fill: #d6b7b7;" unFocusColor="#9b404a">
+                     <font>
+                        <Font name="Century Gothic" size="21.0" />
+                     </font>
+                  </JFXTextArea>
+                  <JFXButton fx:id="dataset" layoutY="259.0" onMouseClicked="#datasets" prefHeight="60.0" prefWidth="200.0" ripplerFill="#9b404a" text="Datasets" textAlignment="CENTER" textFill="#d6b7b7">
+                     <font>
+                        <Font name="Century Gothic" size="22.0" />
+                     </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </JFXButton>
+               </children></Pane>
+            <ScrollPane layoutX="200.0" prefHeight="600.0" prefWidth="700.0" style="-fx-background-color: #2E2E2E;">
+               <content>
+                  <StackPane maxWidth="-Infinity" prefHeight="598.0" prefWidth="697.0" style="-fx-background-color: #2E2E2E;">
+                     <children>
+                        <AnchorPane fx:id="modelsPane" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #2E2E2E;">
+                           <children>
+                              <ImageView fx:id="img_view" fitHeight="383.0" fitWidth="596.0" layoutX="51.0" layoutY="61.0" pickOnBounds="true">
+                                 <image>
+                                    <Image url="@images/NHybF.png" />
+                                 </image>
+                              </ImageView>
+                              <Label fx:id="title" layoutX="292.0" layoutY="14.0" prefHeight="48.0" prefWidth="217.0" text="NeuHybMF (NHybF)" textAlignment="CENTER" textFill="#d6b7b7">
+                                 <font>
+                                    <Font size="24.0" />
+                                 </font>
+                              </Label>
+                              <ImageView fx:id="previous" fitHeight="51.0" fitWidth="55.0" layoutY="217.0" onMouseClicked="#slidePrevious" opacity="0.87" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@images/Back_50px.png" />
+                                 </image>
+                              </ImageView>
+                              <ImageView fx:id="next" fitHeight="51.0" fitWidth="55.0" layoutX="640.0" layoutY="215.0" onMouseClicked="#slideNext" opacity="0.87" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@images/Forward_50px.png" />
+                                 </image></ImageView>
+                              <JFXTextArea fx:id="area_models" editable="false" focusColor="#9b404a" layoutX="35.0" layoutY="487.0" prefHeight="78.0" prefWidth="628.0" style="-fx-prompt-text-fill: #a49395;">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </JFXTextArea>
+                              <Label layoutX="35.0" layoutY="452.0" text="Description :" textFill="#d6b7b7">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Label>
+                           </children></AnchorPane>
+                        <AnchorPane fx:id="datasetsPane" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #2E2E2E;" visible="false">
+                           <children>
+                              <JFXRadioButton fx:id="rd_yelp" layoutX="592.0" layoutY="34.0" text="Yelp" textFill="#a49395">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
+                                 <toggleGroup>
+                                    <ToggleGroup fx:id="toggle1" />
+                                 </toggleGroup>
+                              </JFXRadioButton>
+                              <JFXRadioButton fx:id="rd_ml1m" layoutX="411.0" layoutY="33.0" prefHeight="29.0" prefWidth="160.0" text="MovieLens1M" textFill="#a49395" toggleGroup="$toggle1">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
+                              </JFXRadioButton>
+                              <JFXRadioButton fx:id="rd_ml100k" layoutX="210.0" layoutY="31.0" prefHeight="33.0" prefWidth="160.0" text="MovieLens100K" textFill="#a49395" toggleGroup="$toggle1">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
+                              </JFXRadioButton>
+                              <Label layoutX="24.0" layoutY="30.0" prefHeight="35.0" prefWidth="160.0" text="Choose a dataset :" textFill="#a49395">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="24.0" layoutY="179.0" prefHeight="40.0" prefWidth="502.0" text="Number of negative instances to pair with a positive instance :" textFill="#a49395">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Label>
+                              <JFXTextField fx:id="jtxt_numneg" alignment="CENTER" focusColor="#9b404a" layoutX="528.0" layoutY="182.0" prefHeight="31.0" prefWidth="102.0" style="-fx-text-inner-color: #a49395;">
+                                 <font>
+                                    <Font name="Century Gothic" size="18.0" />
+                                 </font>
+                              </JFXTextField>
+                              <Label layoutX="24.0" layoutY="231.0" prefHeight="44.0" prefWidth="297.0" text="Path to save the train and test files :" textFill="#a49395">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Label>
+                              <JFXButton fx:id="b_proceeddata" buttonType="RAISED" layoutX="260.0" layoutY="320.0" onMouseClicked="#proceed_data" prefHeight="53.0" prefWidth="214.0" ripplerFill="#9b404a" text="PROCEED DATA" textFill="#a49395">
+                                 <font>
+                                    <Font size="24.0" />
+                                 </font>
+                              </JFXButton>
+                              <JFXTextField fx:id="jtxt_savepath" alignment="CENTER" focusColor="#9b404a" layoutX="321.0" layoutY="237.0" prefHeight="33.0" prefWidth="311.0" promptText="C:/Users/name/data/" style="-fx-text-inner-color: #a49395;">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </JFXTextField>
+                              <Label layoutX="24.0" layoutY="86.0" prefHeight="48.0" prefWidth="229.0" text="Choose an evaluation type :" textFill="#a49395">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Label>
+                              <JFXRadioButton fx:id="rd_twnu" layoutX="281.0" layoutY="94.0" prefHeight="32.0" prefWidth="260.0" text="Test set with unknown users" textFill="#a49395">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                                 <toggleGroup>
+                                    <ToggleGroup fx:id="toggle2" />
+                                 </toggleGroup>
+                              </JFXRadioButton>
+                              <JFXRadioButton fx:id="rd_tnormal" layoutX="281.0" layoutY="134.0" prefHeight="31.0" prefWidth="171.0" text="Normal test set" textFill="#a49395" toggleGroup="$toggle2">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </JFXRadioButton>
+                           </children>
+                        </AnchorPane>
+                        <AnchorPane fx:id="resultsPane" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #2E2E2E;" visible="false">
+                           <children>
+                              <ImageView fx:id="imgview_hr" fitHeight="225.0" fitWidth="349.0" layoutX="173.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@images/results/ML1m/HR%20hybmlp%20mlp%20GMF%20emb.PNG" />
+                                 </image></ImageView>
+                              <ImageView fx:id="resuts_next" fitHeight="53.0" fitWidth="50.0" layoutX="640.0" layoutY="256.0" onMouseClicked="#slide_next" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@images/Forward_50px.png" />
+                                 </image>
+                              </ImageView>
+                              <ImageView fx:id="results_previous" fitHeight="52.0" fitWidth="47.0" layoutX="14.0" layoutY="257.0" onMouseClicked="#slide_previous" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@images/Back_50px.png" />
+                                 </image>
+                              </ImageView>
+                              <JFXTextArea fx:id="area_hr" editable="false" focusColor="#9b404a" layoutX="117.0" layoutY="246.0" prefHeight="43.0" prefWidth="446.0" promptText="HR with different embedding sizes" style="-fx-prompt-text-fill: #d6b7b7;" unFocusColor="#9b404a">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </JFXTextArea>
+                              <ImageView fx:id="imgview_ndcg" fitHeight="222.0" fitWidth="334.0" layoutX="178.0" layoutY="306.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@images/results/ML1m/NDCG%20hybmlp%20mlp%20GMF%20emb.PNG" />
+                                 </image></ImageView>
+                              <JFXTextArea fx:id="area_ndcg" editable="false" focusColor="#9b404a" layoutX="121.0" layoutY="540.0" prefHeight="44.0" prefWidth="444.0" promptText="NDCG with different embedding sizes" style="-fx-prompt-text-fill: #d6b7b7;" unFocusColor="#9b404a">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </JFXTextArea>
+                              <Label fx:id="label_dataset" layoutX="14.0" layoutY="14.0" text="MovieLens 1m :" textFill="#d6b7b7">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Label>
+                              <JFXButton buttonType="RAISED" layoutX="557.0" layoutY="527.0" onAction="#change_dataset" prefHeight="48.0" prefWidth="126.0" text="Next dataset" textFill="#d6b7b7">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </JFXButton>
+                           </children></AnchorPane>
+                        <AnchorPane fx:id="aboutPane" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #2E2E2E;" visible="false">
+                           <children>
+                              <Label layoutX="32.0" layoutY="74.0" text="This app was developped by :" textFill="#d6b7b7">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="76.0" layoutY="117.0" text="ZEGHOUD Sofiane" textFill="#d6b7b7">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="77.0" layoutY="160.0" text="KERBOUA Imene Lydia" textFill="#d6b7b7">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="133.0" layoutY="27.0" text="University of Science and Technology Houari Boumediene" textFill="#d6b7b7">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="32.0" layoutY="245.0" text="Tips :" textFill="#d6b7b7">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="20.0" layoutY="369.0" text="You can also train the recommander system and do pretreatments on the datasets " textFill="#d6b7b7">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="23.0" layoutY="396.0" text="by executing the python scripts." textFill="#d6b7b7">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="22.0" layoutY="286.0" text="Execute the data pre-treatment before training the models." textFill="#d6b7b7">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="22.0" layoutY="328.0" text="Select the dataset that you processed before the training." textFill="#d6b7b7">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="41.0" layoutY="141.0" text="&amp;" textFill="#d6b7b7">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Label>
+                           </children></AnchorPane>
+                        <AnchorPane fx:id="trainingPane1" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #2E2E2E;" visible="false">
+                           <children>
+                              <Label layoutX="481.0" layoutY="18.0" text="Optimizer" textFill="#a49395">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Label>
+                              <JFXComboBox fx:id="cb_gmf_optimizer" focusColor="#9b404a" layoutX="575.0" layoutY="19.0" prefHeight="25.0" prefWidth="82.0" promptText="Choose">
+                                 <items>
+                                    <FXCollections fx:factory="observableArrayList">
+                                       <String fx:value="SGD" />
+                                       <String fx:value="Adam" />
+                                    </FXCollections>
+                                 </items>
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor></JFXComboBox>
+                              <Label layoutX="428.0" layoutY="107.0" text="Number of layers" textFill="#a49395">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Label>
+                              <JFXTextField fx:id="jtxt_hmlp_emb" alignment="CENTER" focusColor="#9b404a" layoutX="274.0" layoutY="105.0" prefHeight="28.0" prefWidth="82.0" style="-fx-text-inner-color: #a49395;">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font></JFXTextField>
+                              <Label layoutX="138.0" layoutY="18.0" prefHeight="27.0" prefWidth="132.0" text="Embedding Size" textFill="#a49395">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Label>
+                              <JFXTextField fx:id="jtxt_gmf_emb" alignment="CENTER" focusColor="#9b404a" layoutX="272.0" layoutY="17.0" prefHeight="28.0" prefWidth="81.0" style="-fx-text-inner-color: #a49395;">
+                                 <font>
+                                    <Font name="Century Gothic" size="14.0" />
+                                 </font></JFXTextField>
+                              <Label layoutX="127.0" layoutY="144.0" text="Predictive factors" textFill="#a49395">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="121.0" layoutY="58.0" text="Number of Epochs" textFill="#a49395">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Label>
+                              <JFXTextField fx:id="jtxt_gmf_epochs" alignment="CENTER" focusColor="#9b404a" layoutX="274.0" layoutY="56.0" prefHeight="28.0" prefWidth="81.0" style="-fx-text-inner-color: #a49395;">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font></JFXTextField>
+                              <JFXButton fx:id="start_training" buttonType="RAISED" layoutX="413.0" layoutY="504.0" onMouseClicked="#start_training1" prefHeight="51.0" prefWidth="215.0" ripplerFill="#9b404a" text="START TRAINING" textFill="#ab9b9b">
+                                 <font>
+                                    <Font size="24.0" />
+                                 </font>
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
+                              </JFXButton>
+                              <JFXRadioButton fx:id="rd_gmf" layoutX="22.0" layoutY="18.0" onAction="#select_gmf" text="GMF :" textFill="#a49395">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                                 <toggleGroup>
+                                    <ToggleGroup fx:id="toggle3" />
+                                 </toggleGroup>
+                              </JFXRadioButton>
+                              <JFXRadioButton fx:id="rd_hmlp" layoutX="22.0" layoutY="106.0" onAction="#select_hmlp" text="HybMLP :" textFill="#a49395" toggleGroup="$toggle3">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </JFXRadioButton>
+                              <JFXRadioButton fx:id="rd_nhf" layoutX="28.0" layoutY="227.0" onAction="#select_nhf" prefHeight="27.0" prefWidth="186.0" text="NeuHybMF (NHybF) :" textFill="#a49395" toggleGroup="$toggle3">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </JFXRadioButton>
+                              <Label layoutX="138.0" layoutY="106.0" prefHeight="27.0" prefWidth="132.0" text="Embedding size" textFill="#a49395">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Label>
+                              <JFXTextField fx:id="jtxt_hmlp_layers" alignment="CENTER" focusColor="#9b404a" layoutX="574.0" layoutY="106.0" prefHeight="30.0" prefWidth="84.0" style="-fx-text-inner-color: #a49395;">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font></JFXTextField>
+                              <JFXTextField fx:id="jtxt_hmlp_epochs" alignment="CENTER" focusColor="#9b404a" layoutX="272.0" layoutY="178.0" prefHeight="32.0" prefWidth="86.0" style="-fx-text-inner-color: #a49395;">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font></JFXTextField>
+                              <Label layoutX="481.0" layoutY="145.0" prefHeight="35.0" prefWidth="85.0" text="Optimizer" textFill="#a49395">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="119.0" layoutY="180.0" prefHeight="33.0" prefWidth="152.0" text="Number of epochs" textFill="#a49395">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Label>
+                              <JFXComboBox fx:id="cb_hmlp_optimizer" focusColor="#9b404a" layoutX="573.0" layoutY="150.0" prefHeight="25.0" prefWidth="87.0" promptText="Choose">
+                               <items>
+                                   <FXCollections fx:factory="observableArrayList">
+                                       <String fx:value="SGD" />
+                                       <String fx:value="Adam" />
+                                   </FXCollections>
+                               </items>
+                              </JFXComboBox>
+                               <Label layoutX="69.0" layoutY="350.0" prefHeight="37.0" prefWidth="200.0" text="HybMLP Embedding size" textFill="#a49395">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="126.0" layoutY="393.0" prefHeight="37.0" prefWidth="139.0" text="Predictive factors" textFill="#a49395">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="101.0" layoutY="304.0" prefHeight="37.0" prefWidth="173.0" text="GMF Embedding size" textFill="#a49395">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="44.0" layoutY="428.0" prefHeight="37.0" prefWidth="225.0" text="GMF and HybMLP optimizer" textFill="#a49395">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="420.0" layoutY="304.0" prefHeight="37.0" prefWidth="152.0" text="Number of epochs" textFill="#a49395">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="425.0" layoutY="351.0" prefHeight="37.0" prefWidth="143.0" text="Number of layers" textFill="#a49395">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="394.0" layoutY="394.0" prefHeight="37.0" prefWidth="174.0" text="NeuHybMF optimizer" textFill="#a49395">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Label>
+                              <JFXTextField fx:id="jtxt_nhf_gmf_emb" alignment="CENTER" focusColor="#9b404a" layoutX="271.0" layoutY="307.0" prefHeight="31.0" prefWidth="89.0" style="-fx-text-inner-color: #a49395;">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font></JFXTextField>
+                              <JFXTextField fx:id="jtxt_nhf_hmlp_emb" alignment="CENTER" focusColor="#9b404a" layoutX="272.0" layoutY="353.0" prefHeight="27.0" prefWidth="86.0" style="-fx-text-inner-color: #a49395;">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font></JFXTextField>
+                              <JFXTextField fx:id="jtxt_nhf_epochs" alignment="CENTER" focusColor="#9b404a" layoutX="574.0" layoutY="307.0" prefHeight="31.0" prefWidth="86.0" style="-fx-text-inner-color: #a49395;">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font></JFXTextField>
+                              <JFXTextField fx:id="jtxt_nhf_layers" alignment="CENTER" focusColor="#9b404a" layoutX="573.0" layoutY="354.0" prefHeight="31.0" prefWidth="86.0" style="-fx-text-inner-color: #a49395;">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font></JFXTextField>
+                              <JFXRadioButton fx:id="rd_nhf_pretrain" layoutX="278.0" layoutY="266.0" text="With pre-train" textFill="#a49395">
+                                 <toggleGroup>
+                                    <ToggleGroup fx:id="toggle4" />
+                                 </toggleGroup>
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </JFXRadioButton>
+                              <JFXRadioButton fx:id="rd_nhf_woutpretrain" layoutX="439.0" layoutY="266.0" text="Without pre-train" textFill="#a49395" toggleGroup="$toggle4">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </JFXRadioButton>
+                              <Label layoutX="116.0" layoutY="266.0" text="Choose an option" textFill="#a49395">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Label>
+                              <ImageView fx:id="training_next_page1" fitHeight="49.0" fitWidth="61.0" layoutX="636.0" layoutY="537.0" onMouseClicked="#next_training" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@images/Forward_50px.png" />
+                                 </image>
+                              </ImageView>
+                              <JFXComboBox fx:id="cb_nhf_submodels_optimizer" focusColor="#9b404a" layoutX="273.0" layoutY="436.0" prefHeight="29.0" prefWidth="91.0" promptText="Choose">
+                               <items>
+                                   <FXCollections fx:factory="observableArrayList">
+                                       <String fx:value="SGD" />
+                                       <String fx:value="Adam" />
+                                   </FXCollections>
+                               </items>
+                              </JFXComboBox>
+                               <JFXComboBox fx:id="cb_nhf_optimizer" focusColor="#9b404a" layoutX="571.0" layoutY="400.0" prefHeight="25.0" prefWidth="91.0" promptText="Choose">
+                               <items>
+                                   <FXCollections fx:factory="observableArrayList">
+                                       <String fx:value="SGD" />
+                                       <String fx:value="Adam" />
+                                   </FXCollections>
+                               </items>
+                               </JFXComboBox>
+                              <Label layoutX="480.0" layoutY="180.0" prefHeight="33.0" prefWidth="81.0" text="Batch size" textFill="#a49395">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="483.0" layoutY="430.0" prefHeight="33.0" prefWidth="81.0" text="Batch size" textFill="#a49395">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="483.0" layoutY="55.0" prefHeight="33.0" prefWidth="81.0" text="Batch size" textFill="#a49395">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Label>
+                              <JFXTextField fx:id="jtxt_gmf_batch" alignment="CENTER" focusColor="#9b404a" layoutX="572.0" layoutY="56.0" prefHeight="31.0" prefWidth="88.0" style="-fx-text-inner-color: #a49395;">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </JFXTextField>
+                              <JFXTextField fx:id="jtxt_hmlp_batch" alignment="CENTER" focusColor="#9b404a" layoutX="571.0" layoutY="182.0" prefHeight="30.0" prefWidth="92.0" style="-fx-text-inner-color: #a49395;">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </JFXTextField>
+                              <JFXTextField fx:id="jtxt_nhf_batch" alignment="CENTER" focusColor="#9b404a" layoutX="572.0" layoutY="431.0" prefHeight="31.0" prefWidth="88.0" style="-fx-text-inner-color: #a49395;">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </JFXTextField>
+                              <JFXCheckBox fx:id="check_estop" layoutX="32.0" layoutY="477.0" onAction="#setPatience" text="Activate Early Stopping" textFill="#a49395">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </JFXCheckBox>
+                              <JFXTextField fx:id="jtxt_patience" alignment="CENTER" disable="true" focusColor="#9b404a" layoutX="138.0" layoutY="517.0" prefHeight="30.0" prefWidth="76.0" style="-fx-text-inner-color: #a49395;">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </JFXTextField>
+                              <Label layoutX="55.0" layoutY="516.0" prefHeight="31.0" prefWidth="89.0" text="Patience *" textFill="#a49395">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="20.0" layoutY="562.0" prefHeight="19.0" prefWidth="412.0" text="*number of epochs with no improvement after which training will be stopped" textFill="#a49395" />
+                              <JFXTextField fx:id="jtxt_hmlp_nbfacts" alignment="CENTER" focusColor="#9b404a" layoutX="272.0" layoutY="143.0" prefHeight="28.0" prefWidth="82.0" style="-fx-text-inner-color: #a49395;">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </JFXTextField>
+                              <JFXTextField fx:id="jtxt_nhf_nbfacts" alignment="CENTER" focusColor="#9b404a" layoutX="275.0" layoutY="397.0" prefHeight="28.0" prefWidth="82.0" style="-fx-text-inner-color: #a49395;">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </JFXTextField>
+                              <Label layoutX="127.0" layoutY="144.0" text="Predictive factors" textFill="#a49395">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="121.0" layoutY="58.0" text="Number of Epochs" textFill="#a49395">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </AnchorPane>
+                        <AnchorPane fx:id="traningPane2" prefHeight="200.0" prefWidth="200.0" visible="false">
+                           <children>
+                              <JFXRadioButton fx:id="rd_mlp" layoutX="29.0" layoutY="37.0" onAction="#select_mlp" text="MLP :" textFill="#a49395" toggleGroup="$toggle3">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </JFXRadioButton>
+                              <JFXRadioButton fx:id="rd_ncf" layoutX="28.0" layoutY="201.0" onAction="#select_ncf" text="NeuMF (NCF) :" textFill="#a49395" toggleGroup="$toggle3">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </JFXRadioButton>
+                              <ImageView fx:id="training_previous_page2" fitHeight="60.0" fitWidth="56.0" layoutX="14.0" layoutY="524.0" onMouseClicked="#training" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@images/Back_50px.png" />
+                                 </image>
+                              </ImageView>
+                              <JFXButton fx:id="start_training2" buttonType="RAISED" layoutX="450.0" layoutY="488.0" onMouseClicked="#start_training2" prefHeight="60.0" prefWidth="228.0" ripplerFill="#9b404a" text="START TRAINING" textFill="#a49395">
+                                 <font>
+                                    <Font size="24.0" />
+                                 </font>
+                              </JFXButton>
+                              <Label layoutX="140.0" layoutY="64.0" prefHeight="27.0" prefWidth="132.0" text="Embedding size" textFill="#a49395">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Label>
+                              <JFXTextField fx:id="jtxt_mlp_layers" alignment="CENTER" focusColor="#9b404a" layoutX="575.0" layoutY="64.0" prefHeight="30.0" prefWidth="84.0" style="-fx-text-inner-color: #a49395;">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font></JFXTextField>
+                              <JFXTextField fx:id="jtxt_mlp_epochs" alignment="CENTER" focusColor="#9b404a" layoutX="270.0" layoutY="147.0" prefHeight="32.0" prefWidth="86.0" style="-fx-text-inner-color: #a49395;">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font></JFXTextField>
+                              <Label layoutX="481.0" layoutY="105.0" prefHeight="35.0" prefWidth="85.0" text="Optimizer" textFill="#a49395">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="120.0" layoutY="146.0" prefHeight="33.0" prefWidth="152.0" text="Number of epochs" textFill="#a49395">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Label>
+                              <JFXComboBox fx:id="cb_mlp_optimizer" focusColor="#9b404a" layoutX="573.0" layoutY="109.0" prefHeight="25.0" prefWidth="87.0" promptText="Choose">
+                                 <items>
+                                    <FXCollections fx:factory="observableArrayList">
+                                       <String fx:value="SGD" />
+                                       <String fx:value="Adam" />
+                                    </FXCollections>
+                                 </items>
+                              </JFXComboBox>
+                              <Label layoutX="103.0" layoutY="324.0" prefHeight="37.0" prefWidth="170.0" text="MLP Embedding size" textFill="#a49395">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Label>
+                              <JFXTextField fx:id="jtxt_mlp_emb" alignment="CENTER" focusColor="#9b404a" layoutX="272.0" layoutY="63.0" prefHeight="28.0" prefWidth="82.0" style="-fx-text-inner-color: #a49395;">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font></JFXTextField>
+                              <Label layoutX="127.0" layoutY="363.0" prefHeight="37.0" prefWidth="139.0" text="Predictive factors" textFill="#a49395">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="102.0" layoutY="281.0" prefHeight="37.0" prefWidth="173.0" text="GMF Embedding size" textFill="#a49395">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="75.0" layoutY="410.0" prefHeight="37.0" prefWidth="200.0" text="GMF and MLP optimizer" textFill="#a49395">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="420.0" layoutY="281.0" prefHeight="37.0" prefWidth="152.0" text="Number of epochs" textFill="#a49395">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="425.0" layoutY="325.0" prefHeight="37.0" prefWidth="143.0" text="Number of layers" textFill="#a49395">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="424.0" layoutY="367.0" prefHeight="37.0" prefWidth="144.0" text="NeuMF optimizer" textFill="#a49395">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Label>
+                              <JFXTextField fx:id="jtxt_ncf_gmf_emb" alignment="CENTER" focusColor="#9b404a" layoutX="274.0" layoutY="284.0" prefHeight="31.0" prefWidth="89.0" style="-fx-text-inner-color: #a49395;">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font></JFXTextField>
+                              <JFXTextField fx:id="jtxt_ncf_mlp_emb" alignment="CENTER" focusColor="#9b404a" layoutX="273.0" layoutY="328.0" prefHeight="30.0" prefWidth="91.0" style="-fx-text-inner-color: #a49395;">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font></JFXTextField>
+                              <JFXTextField fx:id="jtxt_ncf_epochs" alignment="CENTER" focusColor="#9b404a" layoutX="574.0" layoutY="284.0" prefHeight="31.0" prefWidth="86.0" style="-fx-text-inner-color: #a49395;">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font></JFXTextField>
+                              <JFXTextField fx:id="jtxt_ncf_layers" alignment="CENTER" focusColor="#9b404a" layoutX="573.0" layoutY="328.0" prefHeight="31.0" prefWidth="86.0" style="-fx-text-inner-color: #a49395;">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font></JFXTextField>
+                              <JFXRadioButton fx:id="rd_ncf_pretrain" layoutX="278.0" layoutY="239.0" text="With pre-train" textFill="#a49395" toggleGroup="$toggle4">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </JFXRadioButton>
+                              <JFXRadioButton fx:id="rd_ncf_woutpretrain" layoutX="439.0" layoutY="239.0" text="Without pre-train" textFill="#a49395" toggleGroup="$toggle4">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </JFXRadioButton>
+                              <Label layoutX="117.0" layoutY="239.0" text="Choose an option" textFill="#a49395">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Label>
+                              <JFXComboBox fx:id="cb_ncf_submodels_optimizer" focusColor="#9b404a" layoutX="273.0" layoutY="414.0" prefHeight="29.0" prefWidth="91.0" promptText="Choose">
+                                 <items>
+                                    <FXCollections fx:factory="observableArrayList">
+                                       <String fx:value="SGD" />
+                                       <String fx:value="Adam" />
+                                    </FXCollections>
+                                 </items>
+                              </JFXComboBox>
+                              <JFXComboBox fx:id="cb_ncf_optimizer" focusColor="#9b404a" layoutX="571.0" layoutY="373.0" prefHeight="25.0" prefWidth="91.0" promptText="Choose">
+                                 <items>
+                                    <FXCollections fx:factory="observableArrayList">
+                                       <String fx:value="SGD" />
+                                       <String fx:value="Adam" />
+                                    </FXCollections>
+                                 </items>
+                              </JFXComboBox>
+                              <Label layoutX="483.0" layoutY="147.0" prefHeight="33.0" prefWidth="81.0" text="Batch size" textFill="#a49395">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="483.0" layoutY="412.0" prefHeight="33.0" prefWidth="81.0" text="Batch size" textFill="#a49395">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Label>
+                              <JFXTextField fx:id="jtxt_mlp_batch" alignment="CENTER" focusColor="#9b404a" layoutX="571.0" layoutY="149.0" prefHeight="30.0" prefWidth="92.0" style="-fx-text-inner-color: #a49395;">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </JFXTextField>
+                              <JFXTextField fx:id="jtxt_ncf_batch" alignment="CENTER" focusColor="#9b404a" layoutX="573.0" layoutY="413.0" prefHeight="31.0" prefWidth="88.0" style="-fx-text-inner-color: #a49395;">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </JFXTextField>
+                              <JFXCheckBox fx:id="check_estop2" layoutX="34.0" layoutY="475.0" onAction="#setPatience2" text="Activate Early Stopping" textFill="#a49395">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </JFXCheckBox>
+                              <JFXTextField fx:id="jtxt_patience2" alignment="CENTER" disable="true" focusColor="#9b404a" layoutX="206.0" layoutY="518.0" prefHeight="30.0" prefWidth="76.0" style="-fx-text-inner-color: #a49395;">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </JFXTextField>
+                              <Label layoutX="107.0" layoutY="517.0" prefHeight="31.0" prefWidth="89.0" text="Patience *" textFill="#a49395">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="107.0" layoutY="562.0" prefHeight="19.0" prefWidth="412.0" text="*number of epochs with no improvement after which training will be stopped" textFill="#a49395" />
+                              <Label layoutX="128.0" layoutY="108.0" text="Predictive factors" textFill="#a49395">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="428.0" layoutY="65.0" text="Number of layers" textFill="#a49395">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Label>
+                              <JFXTextField fx:id="jtxt_mlp_nbfacts" alignment="CENTER" focusColor="#9b404a" layoutX="272.0" layoutY="107.0" prefHeight="28.0" prefWidth="82.0" style="-fx-text-inner-color: #a49395;">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </JFXTextField>
+                              <JFXTextField fx:id="jtxt_ncf_nbfacts" alignment="CENTER" focusColor="#9b404a" layoutX="275.0" layoutY="367.0" prefHeight="30.0" prefWidth="88.0" style="-fx-text-inner-color: #a49395;">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </JFXTextField>
+                           </children>
+                        </AnchorPane>
+                     </children>
+                  </StackPane>
+               </content>
+            </ScrollPane>
+         </children>
+         <cursor>
+            <Cursor fx:constant="DEFAULT" />
+         </cursor></AnchorPane>
+   </children>
+</GridPane>
