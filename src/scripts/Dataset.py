@@ -146,30 +146,6 @@ def dataset_split_opt2(dataset, train_neg, test_neg): #normal testset
     train = train.sample(frac=1).reset_index(drop=True)
     return train, test
 
-def occupation(users) : #for ML 100k
-    users.loc[users.occupation == 'administrator', 'occupation'] = 0
-    users.loc[users.occupation == 'artist', 'occupation'] = 1
-    users.loc[users.occupation == 'doctor', 'occupation'] = 2
-    users.loc[users.occupation == 'educator', 'occupation'] = 3
-    users.loc[users.occupation == 'engineer', 'occupation'] = 4
-    users.loc[users.occupation == 'entertainment', 'occupation'] = 5
-    users.loc[users.occupation == 'executive', 'occupation'] = 6
-    users.loc[users.occupation == 'healthcare', 'occupation'] = 7
-    users.loc[users.occupation == 'homemaker', 'occupation'] = 8
-    users.loc[users.occupation == 'lawyer', 'occupation'] = 9
-    users.loc[users.occupation == 'librarian', 'occupation'] = 10
-    users.loc[users.occupation == 'marketing', 'occupation'] = 11
-    users.loc[users.occupation == 'none', 'occupation'] = 12
-    users.loc[users.occupation == 'other', 'occupation'] = 13
-    users.loc[users.occupation == 'programmer', 'occupation'] = 14
-    users.loc[users.occupation == 'retired', 'occupation'] = 15
-    users.loc[users.occupation == 'salesman', 'occupation'] = 16
-    users.loc[users.occupation == 'scientist', 'occupation'] = 17
-    users.loc[users.occupation == 'student', 'occupation'] = 18
-    users.loc[users.occupation == 'technician', 'occupation'] = 19
-    users.loc[users.occupation == 'writer', 'occupation'] = 20 
-    return users
-
 def genres_items(items):  #for ML 1m  
     result = []
     for index, row in items.iterrows():
@@ -247,7 +223,7 @@ def read_data(dataset, users_path, items_path, ratings_path) :
         users.loc[users.sexe == 'F', 'sexe'] = 0
         users.loc[users.sexe == 'M', 'sexe'] = 1
 
-        users = occupation(users)
+        users.occupation = users.occupation.astype('category').cat.codes.values
 
         items = pn.read_csv(items_path, delimiter = '|', encoding ='cp1252',
             names = ['item_id', 'title', 'release_date', 'video_release_date',
